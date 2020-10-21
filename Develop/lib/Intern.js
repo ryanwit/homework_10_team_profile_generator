@@ -1,5 +1,4 @@
 // TODO: Write code to define and export the Intern class.  HINT: This class should inherit from Employee.
-
 const Employee = require ("./Employee")
 //allowing us to bring constructor in use class
 class Intern extends Employee {

@@ -6,10 +6,10 @@ const path = require("path");
 const fs = require("fs");
 const team = [];
 
-const OUTPUT_DIR = path.resolve(__dirname, "output"); //! use with build team function
-const outputPath = path.join(OUTPUT_DIR, "team.html"); //! same as above
-
-const render = require("./lib/htmlRenderer"); //! SAME
+ //! use with build team function
+const OUTPUT_DIR = path.resolve(__dirname, "output");
+const outputPath = path.join(OUTPUT_DIR, "team.html");
+const render = require("./lib/htmlRenderer"); 
 
 /* -------------------------------------------------------------------------- */
 /*                               INITIAL-PROMPT                               */
@@ -33,12 +33,13 @@ function createMember() {
     ]).then(response => {
         switch(response.employeeSelection) {
             case "Engineer": 
-            generateEngineer() //TODO: Build Engineer function similar to genMgr
+            generateEngineer() 
             break;
             case "Intern":
-            generateIntern() // TODO: Build INtern function see below
+            generateIntern()
             break;
-            default: //! Call function to generate HTML (buildTeam example)
+            default: 
+                buildTeam()//! Call function to generate HTML 
         }
     })
 }   
@@ -59,67 +60,91 @@ function generateManager() {
         type: "input",
         message: "What is their email address?",
         name: "managerEmail"
-        }, // add question about mgr id - add to new mgr const below
+        },
+        {
+        type: "input",
+        message: "What is your manager ID?",
+        name: "managerId"
+        },
         
     ]).then((response) => {
-        const manager = new Manager(response.managerName, response.managerOffice, response.managerEmail)
+        const manager = new Manager(response.managerName, response.managerOffice, response.managerEmail, response.managerId)
         team.push(manager)
         createMember()
     })
 }
+
+generateManager()
     
-
 /* -------------------------------- Engineer -------------------------------- */
-
-    else if (response.employeeSelection === Engineer) {
-        inquirer.prompt([
-            {
-            type: "input",
-            message: "What is the name of the engineer?",
-            name: "engineer-name"
-            },
-            {
-            type: "input",
-            message: "What is their GitHub username?",
-            name: "engineer-github"
-            },
-            {
-            type: "input",
-            message: "What is their email address?",
-            name: "engineer-address"
-            },
-        ])
-    } 
-
-/* --------------------------------- INTERN --------------------------------- */
-
-    else if (response.employeeSelection === Intern) {
-        inquirer.prompt([
-            {
-            type: "input",
-            message: "What is the name of the intern?",
-            name: "intern-name"
-            },
-            {
-            type: "input",
-            message: "What school do they attend?",
-            name: "intern-github"
-            },
-            {
-            type: "input",
-            message: "What is their email address?",
-            name: "intern-address"
-            },
-        ])
-
-function makeHTML() { //!bUILD TEAM
-    const html = render(employeeSelection)
-    writeFileSync("filename.html", )
-    if (err {
-        console.log(err)
+function generateEngineer() {
+    inquirer.prompt([
+        {
+        type: "input",
+        message: "What is the name of the engineer?",
+        name: "engineerName"
+        },
+        {
+        type: "input",
+        message: "What is their GitHub username?",
+        name: "engineerGithub"
+        },
+        {
+        type: "input",
+        message: "What is their email address?",
+        name: "engineerEmail"
+        },
+        {
+        type: "input",
+        message: "What is the engineers ID?",
+        name: "engineerId"
+        },
+    ]).then((response) => {
+        const engineer = new Engineer(response.engineerName, response.engineerGitHub, response.engineerEmail, response.engineerId)
+        team.push(engineer)
+        createMember()
     })
 }
 
+/* --------------------------------- Intern --------------------------------- */
+function generateIntern() {
+    inquirer.prompt([
+        {
+        type: "input",
+        message: "What is the name of the intern?",
+        name: "internName"
+        },
+        {
+        type: "input",
+        message: "What school do they attend?",
+        name: "internSchool"
+        },
+        {
+        type: "input",
+        message: "What is their email address?",
+        name: "internEmail"
+        },
+        {
+        type: "input",
+        message: "What the interns Id?",
+        name: "internId"
+        },
+    ]).then((response) => {
+        const intern = new Intern(response.internName, response.internSchool, response.internEmail, response.internId)
+        team.push(intern)
+        createMember()
+})
+
+/* ------------------------------- Build Team ------------------------------- */
+
+function buildTeam() {
+    if (!fs.existsSync(OUTPUT_DIR)) {
+        fs.mkdirSync(OUTPUT_DIR)
+    }
+    fs.writeFileSync(outputPath, render(team), 'utf-8')
+ }
+
+ 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 
@@ -141,4 +166,4 @@ function makeHTML() { //!bUILD TEAM
 // and Intern classes should all extend from a class named Employee; see the directions
 // for further information. Be sure to test out each class and verify it generates an
 // object with the correct structure and methods. This structure will be crucial in order
-// for the provided `render` function to work! ```
+// for the provided `render` function to work!
