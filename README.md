@@ -23,21 +23,21 @@ NPM - Inquirer Package, JavaScript
 
 ## Problems I faced
 
-I had many issues figuring out how to get the questions to appear on the readme file.  I also had trouble with the license.
+I had so issues with a file output that was hidden but we removed it and it worked
 
 ## Credits
 
 Ryan Witherspoon
 
 ## Image
-![image info](./images/homework_09_screengrab.png)
+![image info](./images/homework_10_screengrab.png)
 
 ## Links
-[link to GitHub!](https://github.com/ryanwit/homework_09_good_readme_generator)
+[link to GitHub!](https://ryanwit.github.io/homework_10_team_profile_generator/.)
 
-[link to Webpage!](https://ryanwit.github.io/homework_09_good_readme_generator/)
+[link to Webpage!](https://github.com/ryanwit/homework_10_team_profile_generator)
 
-[link to Screencastify Demo!](https://drive.google.com/file/d/1GWdQCsHHioojFlGW8V4ytOf8WF1rzAYs/preview)
+[link to Screencastify Demo!](https://drive.google.com/file/d/1rrUyZWQYi47d-9Ed4cdVNochJUtbFbze/view)
 
 
 # License

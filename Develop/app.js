@@ -68,7 +68,7 @@ function generateManager() {
         },
         
     ]).then((response) => {
-        const manager = new Manager(response.managerName, response.managerOffice, response.managerEmail, response.managerId)
+        const manager = new Manager(response.managerName, response.managerId, response.managerEmail, response.managerOffice)
         team.push(manager)
         createMember()
     })
@@ -100,7 +100,7 @@ function generateEngineer() {
         name: "engineerId"
         },
     ]).then((response) => {
-        const engineer = new Engineer(response.engineerName, response.engineerGitHub, response.engineerEmail, response.engineerId)
+        const engineer = new Engineer(response.engineerName, response.engineerId, response.engineerEmail, response.engineerGithub)
         team.push(engineer)
         createMember()
     })
@@ -130,7 +130,7 @@ function generateIntern() {
         name: "internId"
         },
     ]).then((response) => {
-        const intern = new Intern(response.internName, response.internSchool, response.internEmail, response.internId)
+        const intern = new Intern(response.internName, response.internId, response.internEmail, response.internSchool)
         team.push(intern)
         createMember()
 })
@@ -139,8 +139,10 @@ function generateIntern() {
 
 function buildTeam() {
     if (!fs.existsSync(OUTPUT_DIR)) {
+        console.log("test1")
         fs.mkdirSync(OUTPUT_DIR)
     }
+    console.log("test")
     fs.writeFileSync(outputPath, render(team), 'utf-8')
  }
 
